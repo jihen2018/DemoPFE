@@ -1,15 +1,17 @@
 package org.sid.Service;
+import java.util.List;
+
 import org.sid.dao.RoleRepository;
-import org.sid.dao.UserRepository;
+import org.sid.dao.EmployeRepository;
 import org.sid.entities.AppRole;
-import org.sid.entities.AppUser;
+import org.sid.entities.Employe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
-public class AccountService implements IAccoutService{
+public class EmployeService implements IEmployeService{
 	
 	@Autowired
 	BCryptPasswordEncoder BCryptPasswordEncoder;
@@ -17,10 +19,10 @@ public class AccountService implements IAccoutService{
 	@Autowired
 	RoleRepository RoleRepository;
 	@Autowired
-	UserRepository UserRepository;
+	EmployeRepository UserRepository;
 	
 	@Override
-	public AppUser saveUser(AppUser user) {
+	public Employe saveUser(Employe user) {
 		String hassPW = BCryptPasswordEncoder.encode(user.getPassword());
 		user.setPassword(hassPW);
 		
@@ -34,16 +36,26 @@ public class AccountService implements IAccoutService{
 	@Override
 	public void addRoleToUser(String username, String rolename) {
 		AppRole role=RoleRepository.findByRolename(rolename);
-		AppUser user = UserRepository.findByUsername(username);
+		Employe user = UserRepository.findByUsername(username);
 		
 		user.getRoles().add(role);
 		
 	}
 	@Override
-	public AppUser findUserByUsername(String username) {
+	public Employe findUserByUsername(String username) {
 		// TODO Auto-generated method stub
 		return UserRepository.findByUsername(username);
 	}
-
 	
+	@Override
+	public List<Employe> findAll() {
+		return UserRepository.findAll();
+	}
+	
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		UserRepository.delete(id);
+		
+	}
+
 }

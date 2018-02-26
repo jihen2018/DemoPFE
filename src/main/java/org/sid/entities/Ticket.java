@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Entity 
 
-public class Tasks {
+public class Ticket {
 	
 	@Id @GeneratedValue
 	private Long id;
@@ -27,12 +27,12 @@ public class Tasks {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public Tasks(Long id, String nom) {
+	public Ticket(Long id, String nom) {
 		super();
 		this.id = id;
 		this.nom = nom;
 	}
-	public Tasks() {
+	public Ticket() {
 		super();
 	}
 	

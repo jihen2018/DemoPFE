@@ -12,7 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.sid.entities.AppUser;
+import org.sid.entities.Employe;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -38,11 +38,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
-		AppUser appUser = new AppUser();
+		Employe appUser = new Employe();
 	
 		try {
 			
-			appUser = new ObjectMapper().readValue(request.getInputStream(),AppUser.class);
+			appUser = new ObjectMapper().readValue(request.getInputStream(),Employe.class);
 		
 		} catch (IOException e) {
 			throw new RuntimeException(e);

@@ -2,17 +2,19 @@ package org.sid;
 
 import java.util.stream.Stream;
 
-import org.sid.Service.IAccoutService;
+import org.sid.Service.IEmployeService;
 import org.sid.dao.TasksRepository;
 import org.sid.entities.AppRole;
-import org.sid.entities.AppUser;
-import org.sid.entities.Tasks;
+import org.sid.entities.Employe;
+import org.sid.entities.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
 public class DemoPfeApplication implements CommandLineRunner {
@@ -20,7 +22,8 @@ public class DemoPfeApplication implements CommandLineRunner {
 	private TasksRepository tasksRepository;
 
 	@Autowired
-	private IAccoutService  accountService;
+	private IEmployeService  employeService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(DemoPfeApplication.class, args);
 	}
@@ -29,22 +32,38 @@ public class DemoPfeApplication implements CommandLineRunner {
 	public BCryptPasswordEncoder getBCrPE() {
 		return new BCryptPasswordEncoder();
 	}
+	@Bean
+    public WebMvcConfigurerAdapter corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+    			.allowedOrigins("http://localhost:4200")
+    			.allowedMethods("POST", "GET","DELETE")
+    			.allowCredentials(false);
+            }
+        };
+	}
 
 	@Override
 	public void run(String... arg0) throws Exception {
-		accountService.saveUser(new AppUser(null,"admin", "1234", null));
-		accountService.saveUser(new AppUser(null,"user", "1234", null));		
-		accountService.saveRole(new AppRole(null, "ADMIN"));
-		accountService.saveRole(new AppRole(null, "USER"));
+		employeService.saveUser(new Employe(null,"superadmin", "superadmin","jihen","bn","mourouj","111",null));
+		employeService.saveUser(new Employe(null,"superviseur", "superviseur","malek","bn","mourouj","111",null));
+		employeService.saveUser(new Employe(null,"agent", "agent","admin","bn","mourouj","111",null));
 		
-		accountService.addRoleToUser("admin", "ADMIN");
-		accountService.addRoleToUser("admin", "USER");
-		accountService.addRoleToUser("user", "USER");
+		
+		employeService.saveRole(new AppRole(null, "SUPERADMIN"));
+		employeService.saveRole(new AppRole(null, "SPERVISEUR"));
+		employeService.saveRole(new AppRole(null, "USER"));
+		
+		employeService.addRoleToUser("superadmin", "SUPERADMIN");
+		employeService.addRoleToUser("superviseur", "SPERVISEUR");
+		employeService.addRoleToUser("agent", "USER");
 		
 		
 		
 		Stream.of("T1","T2","T3").forEach(t -> {
-			tasksRepository.save(new Tasks(null,t));
+			tasksRepository.save(new Ticket(null,t));
 		}) ;
 		
 		tasksRepository.findAll().forEach(t->{

@@ -3,7 +3,7 @@ package org.sid.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.sid.entities.AppUser;
+import org.sid.entities.Employe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,11 +16,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
 	@Autowired
-	private AccountService AccountService;
+	private EmployeService employeService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		AppUser user=AccountService.findUserByUsername(username);
+		Employe user=employeService.findUserByUsername(username);
 		if (user==null) throw new UsernameNotFoundException(username);
 		
 		Collection<GrantedAuthority> authorities=new ArrayList<>();
