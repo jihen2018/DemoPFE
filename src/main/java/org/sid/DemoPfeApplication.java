@@ -3,9 +3,11 @@ package org.sid;
 import java.util.stream.Stream;
 
 import org.sid.Service.IEmployeService;
+import org.sid.dao.EquipeRepository;
 import org.sid.dao.TasksRepository;
 import org.sid.entities.AppRole;
 import org.sid.entities.Employe;
+import org.sid.entities.Equipe;
 import org.sid.entities.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,7 +25,7 @@ public class DemoPfeApplication implements CommandLineRunner {
 
 	@Autowired
 	private IEmployeService  employeService;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoPfeApplication.class, args);
 	}
@@ -47,9 +49,9 @@ public class DemoPfeApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg0) throws Exception {
-		employeService.saveUser(new Employe(null,"superadmin", "superadmin","jihen","bn","mourouj","111",null));
-		employeService.saveUser(new Employe(null,"superviseur", "superviseur","malek","bn","mourouj","111",null));
-		employeService.saveUser(new Employe(null,"agent", "agent","admin","bn","mourouj","111",null));
+		employeService.saveUser(new Employe(null,"superadmin", "superadmin","jihen","bn","mourouj","1111", null,null));
+		employeService.saveUser(new Employe(null,"superviseur", "superviseur","malek","bn","mourouj","111",null,null));
+		employeService.saveUser(new Employe(null,"agent", "agent","admin","bn","mourouj","111",null,null));
 		
 		
 		employeService.saveRole(new AppRole(null, "SUPERADMIN"));
@@ -60,8 +62,7 @@ public class DemoPfeApplication implements CommandLineRunner {
 		employeService.addRoleToUser("superviseur", "SPERVISEUR");
 		employeService.addRoleToUser("agent", "USER");
 		
-		
-		
+	
 		Stream.of("T1","T2","T3").forEach(t -> {
 			tasksRepository.save(new Ticket(null,t));
 		}) ;
@@ -69,7 +70,8 @@ public class DemoPfeApplication implements CommandLineRunner {
 		tasksRepository.findAll().forEach(t->{
 			System.out.println(t.getNom());
 		});
-		
+
+	
 		
 	}
 }

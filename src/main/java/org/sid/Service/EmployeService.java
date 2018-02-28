@@ -43,7 +43,8 @@ public class EmployeService implements IEmployeService{
 	}
 	@Override
 	public Employe findUserByUsername(String username) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub1
+		Employe e = UserRepository.findByUsername(username);
 		return UserRepository.findByUsername(username);
 	}
 	
