@@ -22,28 +22,27 @@ public class EquipeRestController  {
 	@Autowired
 	IEquipeService    EquipeService;
 	
-	@GetMapping("/Equipe")
+	@RequestMapping(value="/listEquipe",method=RequestMethod.GET)
 	public List<Equipe> findAll(){
 		return EquipeService.findAll();
 	}
-	/*@PostMapping("/saveEquipe")
-	public Equipe create(@RequestBody Equipe E) {
-		return EquipeService.create(E);
-	}*/
+	
+
+	
 	@RequestMapping(value="/saveEquipe",method=RequestMethod.POST)
-    public Equipe saveUser(@RequestBody Equipe E) {
+    public Equipe create(@RequestBody Equipe E) {
     	
 		EquipeService.create(E);
     	 return E;
     }
 	
-	@GetMapping("/findEquipe")
+	@RequestMapping(value="/findEquipe/{id}",method=RequestMethod.GET)
 	public Equipe find(@PathVariable long id ) {
 		return EquipeService.find(id);
 	}
 	
 	
-	@DeleteMapping("/deleteEquipe")
+	@RequestMapping(value="{id}",method=RequestMethod.DELETE)
 	public void  delete(@PathVariable Long id) {
 		EquipeService.delete(id);		
 	

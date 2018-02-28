@@ -14,24 +14,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 
 @Entity
+@Table(name="employe")
 public class Employe implements Serializable {
 	
 
 	@Id @GeneratedValue
 	private Long id;
-	@Column(unique=true)
+	@Column(name="username")
 	private String username;
+	@Column(name="password")
 	private String password;
-	private String NomEmploye;
+	@Column(name="nom_employe")
+	private String nomEmploye;
+	@Column(name="prenom_employe")
 	private String PrenomEmploye;
-	private String Addresse;
-	private String telephone;
+	@Column(name="addresse")
+	private String addresse;
+	@Column(name="telephone")
+    private String telephone;
 	
 	@ManyToOne
 	@JoinColumn(name="Employe_Equipe_id")
@@ -40,11 +47,13 @@ public class Employe implements Serializable {
 	@ManyToMany(fetch=FetchType.EAGER)
 	private Collection<AppRole> roles= new ArrayList<>();
 
-	
-	
+
+
+
 	public Long getId() {
 		return id;
 	}
+
 
 
 
@@ -54,9 +63,11 @@ public class Employe implements Serializable {
 
 
 
+
 	public String getUsername() {
 		return username;
 	}
+
 
 
 
@@ -66,9 +77,11 @@ public class Employe implements Serializable {
 
 
 
+
 	public String getPassword() {
 		return password;
 	}
+
 
 
 
@@ -78,15 +91,18 @@ public class Employe implements Serializable {
 
 
 
+
 	public String getNomEmploye() {
-		return NomEmploye;
+		return nomEmploye;
 	}
+
 
 
 
 	public void setNomEmploye(String nomEmploye) {
-		NomEmploye = nomEmploye;
+		this.nomEmploye = nomEmploye;
 	}
+
 
 
 
@@ -96,21 +112,25 @@ public class Employe implements Serializable {
 
 
 
+
 	public void setPrenomEmploye(String prenomEmploye) {
 		PrenomEmploye = prenomEmploye;
 	}
 
 
 
+
 	public String getAddresse() {
-		return Addresse;
+		return addresse;
 	}
+
 
 
 
 	public void setAddresse(String addresse) {
-		Addresse = addresse;
+		this.addresse = addresse;
 	}
+
 
 
 
@@ -120,9 +140,11 @@ public class Employe implements Serializable {
 
 
 
+
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
 
 
 
@@ -132,9 +154,11 @@ public class Employe implements Serializable {
 
 
 
+
 	public void setEquipe(Equipe equipe) {
-		this.Equipe = equipe;
+		Equipe = equipe;
 	}
+
 
 
 
@@ -144,25 +168,28 @@ public class Employe implements Serializable {
 
 
 
+
 	public void setRoles(Collection<AppRole> roles) {
 		this.roles = roles;
 	}
 
 
 
+
 	public Employe(Long id, String username, String password, String nomEmploye, String prenomEmploye, String addresse,
-			String telephone,Equipe Equipe,  Collection<AppRole> roles) {
+			String telephone, org.sid.entities.Equipe equipe, Collection<AppRole> roles) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		NomEmploye = nomEmploye;
+		this.nomEmploye = nomEmploye;
 		PrenomEmploye = prenomEmploye;
-		Addresse = addresse;
+		this.addresse = addresse;
 		this.telephone = telephone;
-		this.Equipe = Equipe;
+		Equipe = equipe;
 		this.roles = roles;
 	}
+
 
 
 

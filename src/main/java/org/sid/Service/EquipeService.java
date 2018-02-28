@@ -12,6 +12,7 @@ public class EquipeService implements IEquipeService{
 	
 	@Autowired
 	EquipeRepository equipeRepository;
+	
 	@Override
 	public Equipe create(Equipe equipe) {
 		equipeRepository.save(equipe);

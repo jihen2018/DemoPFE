@@ -3,6 +3,7 @@ package org.sid.web;
 import java.util.List;
 
 import org.sid.Service.IEmployeService;
+import org.sid.entities.AppRole;
 import org.sid.entities.Employe;
 import org.sid.entities.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,17 +49,26 @@ public class EmployeRestService {
 	public void delete(@PathVariable long id) {
 		employeService.delete(id);	
 }
+	
 	@RequestMapping(value="/addEmploye",method=RequestMethod.POST)
     public Employe saveUser(@RequestBody Employe Employe) {
     	
     	 employeService.saveUser(Employe);
     	 return Employe;
     }
+	
 	@RequestMapping(value="/{username}",method=RequestMethod.GET)
-	public Employe findUserByUsername(String username) {
+	public Employe findUserByUsername(@PathVariable String username) {
 		
 		return employeService.findUserByUsername(username);
 	}
+
+/*	@RequestMapping(value="/addEmploye",method=RequestMethod.POST)
+	public void addRoleToUser(String username,String rolename) {
+			employeService.addRoleToUser(Formuser.getUsername()	,"USER");
+;
+		
+	}*/
 
 
 }
