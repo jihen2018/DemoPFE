@@ -7,7 +7,7 @@ import org.sid.entities.Employe;
 
 public interface IEmployeService {
 	
-	public Employe saveUser(Employe user);
+	public Employe saveUser(Employe Employe);
 	public AppRole saveRole(AppRole role);
 	public void addRoleToUser(String username,String rolename);
 	public Employe findUserByUsername(String username);
