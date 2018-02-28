@@ -4,7 +4,11 @@ import java.util.stream.Stream;
 
 import org.sid.Service.IEmployeService;
 import org.sid.dao.EquipeRepository;
+<<<<<<< HEAD
 import org.sid.dao.TasksRepository;
+=======
+import org.sid.dao.TicketRepository;
+>>>>>>> d383532bdb8df35f8e5c91aaae3d45b8b2b8f04d
 import org.sid.entities.AppRole;
 import org.sid.entities.Employe;
 import org.sid.entities.Equipe;
@@ -21,7 +25,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 public class DemoPfeApplication implements CommandLineRunner {
 	@Autowired
-	private TasksRepository tasksRepository;
+	private TicketRepository tasksRepository;
 
 	@Autowired
 	private IEmployeService  employeService;
@@ -62,7 +66,11 @@ public class DemoPfeApplication implements CommandLineRunner {
 		employeService.addRoleToUser("superviseur", "SPERVISEUR");
 		employeService.addRoleToUser("agent", "USER");
 		
+<<<<<<< HEAD
 	
+=======
+	/*
+>>>>>>> d383532bdb8df35f8e5c91aaae3d45b8b2b8f04d
 		Stream.of("T1","T2","T3").forEach(t -> {
 			tasksRepository.save(new Ticket(null,t));
 		}) ;
@@ -70,7 +78,11 @@ public class DemoPfeApplication implements CommandLineRunner {
 		tasksRepository.findAll().forEach(t->{
 			System.out.println(t.getNom());
 		});
+<<<<<<< HEAD
 
+=======
+*/
+>>>>>>> d383532bdb8df35f8e5c91aaae3d45b8b2b8f04d
 	
 		
 	}

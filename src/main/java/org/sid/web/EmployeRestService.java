@@ -49,20 +49,29 @@ public class EmployeRestService {
 	public void delete(@PathVariable long id) {
 		employeService.delete(id);	
 }
+<<<<<<< HEAD
 	
+=======
+>>>>>>> d383532bdb8df35f8e5c91aaae3d45b8b2b8f04d
 	@RequestMapping(value="/addEmploye",method=RequestMethod.POST)
     public Employe saveUser(@RequestBody Employe Employe) {
     	
     	 employeService.saveUser(Employe);
     	 return Employe;
     }
+<<<<<<< HEAD
 	
 	@RequestMapping(value="/{username}",method=RequestMethod.GET)
 	public Employe findUserByUsername(@PathVariable String username) {
+=======
+	@RequestMapping(value="/{username}",method=RequestMethod.GET)
+	public Employe findUserByUsername(String username) {
+>>>>>>> d383532bdb8df35f8e5c91aaae3d45b8b2b8f04d
 		
 		return employeService.findUserByUsername(username);
 	}
 
+<<<<<<< HEAD
 /*	@RequestMapping(value="/addEmploye",method=RequestMethod.POST)
 	public void addRoleToUser(String username,String rolename) {
 			employeService.addRoleToUser(Formuser.getUsername()	,"USER");
@@ -70,5 +79,7 @@ public class EmployeRestService {
 		
 	}*/
 
+=======
+>>>>>>> d383532bdb8df35f8e5c91aaae3d45b8b2b8f04d
 
 }
